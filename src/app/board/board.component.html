@@ -1,0 +1,21 @@
+<button (click)="this.newBoard()">Generate New Board</button>
+<h4 *ngIf="this.gameSuccess">Well Done!</h4>
+<p *ngIf="this.queensOnBoard.length">Score Board</p>
+<div>
+    <p *ngFor="let queen of queensOnBoard; let i = index">
+        {{ "Q" + [i+1] + ": "+ this.getRowLetter(this.parseQueenPosition(queen)[1]).toLocaleUpperCase() + (this.parseQueenPosition(queen)[0] + 1) }}
+    </p>
+</div>
+
+<main>
+    <table>
+            <tr *ngFor="let row of grid; let i = index">
+                <app-square *ngFor="let col of grid[i]; let j = index"
+                [row]="i"
+                [col]="this.getRowLetter(j)"
+                [type]="this.grid[i][j]"
+                (click)="this.placeQueen(i, j)">
+                </app-square>
+            </tr>
+    </table>
+</main>
